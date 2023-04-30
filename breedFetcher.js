@@ -5,10 +5,12 @@ const url = `https://api.thecatapi.com/v1/breeds/search?q=${breedName}`;
 request(url, function(error, response, body) {
   if (!error && response.statusCode === 200) {
     // Handle the response data here
-    console.log(body);
     const data = JSON.parse(body);
-    console.log(data);
-    console.log(typeof data);
+    if (data.length === 0) {
+      console.log(`Breed ${breedName} not found`);
+    } else {
+      console.log(data);
+    }
   } else {
     // Handle errors here
     console.log('Error fetching data from API:', error);
